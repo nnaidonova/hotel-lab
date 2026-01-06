@@ -1,0 +1,223 @@
+/* styles.css — Modern UI refresh (palette provided)
+   Palette:
+   #2C3532 (bg)
+   #0F6466 (primary)
+   #D8B08C (accent-1)
+   #FFCB9A (accent-2)
+   #D2E8E3 (surface)
+*/
+
+:root{
+  --bg: #2C3532;
+  --primary: #0F6466;
+  --accent-1: #D8B08C;
+  --accent-2: #FFCB9A;
+  --surface: #D2E8E3;
+
+  --text: #0b1f1e;
+  --muted: rgba(11, 31, 30, 0.68);
+
+  --radius: 18px;
+  --radius-sm: 12px;
+  --shadow: 0 18px 50px rgba(0,0,0,.25);
+  --ring: rgba(15, 100, 102, 0.45);
+  --border: rgba(15, 100, 102, 0.20);
+}
+
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
+
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(900px 450px at 12% 10%, rgba(255,203,154,.22), transparent 60%),
+    radial-gradient(900px 450px at 88% 18%, rgba(216,176,140,.18), transparent 60%),
+    linear-gradient(180deg, rgba(15,100,102,.22), transparent 55%),
+    var(--bg);
+
+  /* Center page content even if you don't have a wrapper */
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+/* Make common top-level layouts centered without requiring HTML changes */
+body > :where(div, main, section, form){
+  width: min(980px, 100%);
+}
+
+/* Headings */
+h1, h2, h3{
+  letter-spacing: -0.02em;
+  margin: 0 0 14px 0;
+  color: #0b2c2b;
+}
+h1{
+  font-size: clamp(24px, 2.2vw, 36px);
+  font-weight: 800;
+}
+
+/* If your page is basically header text + form, wrap it visually */
+body > :where(div, main, section){
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* Add padding when the immediate container doesn't have any */
+body > :where(div, main, section) > :where(h1, h2, h3, p, form){
+  padding-left: 28px;
+  padding-right: 28px;
+}
+body > :where(div, main, section) > h1{
+  padding-top: 26px;
+  padding-bottom: 10px;
+  background: linear-gradient(135deg, rgba(15,100,102,.16), rgba(255,203,154,.12));
+  border-bottom: 1px solid rgba(15, 100, 102, 0.14);
+}
+body > :where(div, main, section) > p{
+  margin: 10px 0 0 0;
+  padding-top: 10px;
+  padding-bottom: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+p{ margin: 10px 0; color: var(--muted); line-height: 1.5; }
+
+/* Form base */
+form{
+  background: transparent;
+  padding: 20px 28px 28px 28px;
+}
+
+/* Field groups/labels */
+label{
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(11,31,30,.78);
+  margin-bottom: 6px;
+}
+
+/* Inputs */
+input, select, textarea{
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(15, 100, 102, 0.25);
+  background: rgba(210, 232, 227, 0.70);
+  color: var(--text);
+  outline: none;
+  transition: box-shadow .15s ease, border-color .15s ease, transform .05s ease;
+}
+
+input::placeholder, textarea::placeholder{
+  color: rgba(11,31,30,.45);
+}
+
+input:focus, select:focus, textarea:focus{
+  border-color: rgba(15, 100, 102, 0.55);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+/* Make the first "choose query" row feel primary */
+select{
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(11,31,30,.60) 50%),
+    linear-gradient(135deg, rgba(11,31,30,.60) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 54%,
+    calc(100% - 12px) 54%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* Buttons */
+button, input[type="submit"]{
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  background: var(--primary);
+  color: var(--surface);
+  box-shadow: 0 10px 24px rgba(15,100,102,.28);
+  transition: transform .08s ease, filter .15s ease, box-shadow .15s ease;
+}
+
+button:hover, input[type="submit"]:hover{
+  filter: brightness(1.05);
+  box-shadow: 0 14px 32px rgba(15,100,102,.35);
+}
+
+button:active, input[type="submit"]:active{
+  transform: translateY(1px);
+}
+
+/* Improve spacing between fields if HTML is "label + input" on separate lines */
+form :where(label + input, label + select, label + textarea){
+  margin-bottom: 14px;
+}
+
+/* If your HTML uses line breaks <br>, give extra air */
+br{ line-height: 1.7; }
+
+/* Notes/footers (your "Примітка") */
+:where(.note, .hint, .help, .warning, .message){
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255,203,154,.35);
+  border: 1px solid rgba(216,176,140,.45);
+  color: rgba(11,31,30,.78);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Tables (if you render query results as a table) */
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(15,100,102,.18);
+  background: rgba(210,232,227,.55);
+}
+
+thead th{
+  text-align: left;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(11,31,30,.70);
+  background: rgba(15,100,102,.10);
+  padding: 12px 12px;
+  border-bottom: 1px solid rgba(15,100,102,.18);
+}
+
+tbody td{
+  padding: 12px 12px;
+  border-bottom: 1px solid rgba(15,100,102,.10);
+  color: rgba(11,31,30,.85);
+}
+
+tbody tr:hover{
+  background: rgba(255,203,154,.18);
+}
+
+/* Small screens */
+@media (max-width: 520px){
+  body{ padding: 18px 12px; }
+  form{ padding: 16px 16px 20px 16px; }
+  body > :where(div, main, section) > :where(h1, h2, h3, p, form){
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
